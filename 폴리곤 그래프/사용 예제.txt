@@ -1,0 +1,40 @@
+        m_Sprite_PolyStatus.SetDistance(4, 0.1f);
+        m_Sprite_PolyStatus.InitDistance(0.1f);
+
+        if ((m_AttributeFlags & ECharAttributeFlags.Attack) == ECharAttributeFlags.Attack)
+        {
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[0], x => m_Sprite_PolyStatus.VerticesDistance[0] = x, 1.0f, 0.5f).SetDelay(0.15f);
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[m_StatusSideCount], x => m_Sprite_PolyStatus.VerticesDistance[m_StatusSideCount] = x, 1.0f, 0.5f).SetDelay(0.15f).OnUpdate(m_Sprite_PolyStatus.MarkAsChanged);
+        }
+        else
+        {
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[0], x => m_Sprite_PolyStatus.VerticesDistance[0] = x, 0.5f, 0.5f).SetDelay(0.15f);
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[m_StatusSideCount], x => m_Sprite_PolyStatus.VerticesDistance[m_StatusSideCount] = x, 0.5f, 0.5f).SetDelay(0.15f).OnUpdate(m_Sprite_PolyStatus.MarkAsChanged);
+        }
+
+        if ((m_AttributeFlags & ECharAttributeFlags.Health) == ECharAttributeFlags.Health)
+        {
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[1], x => m_Sprite_PolyStatus.VerticesDistance[1] = x, 1.0f, 0.5f).SetDelay(0.15f);
+        }
+        else
+        {
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[1], x => m_Sprite_PolyStatus.VerticesDistance[1] = x, 0.5f, 0.5f).SetDelay(0.15f);
+        }
+
+        if ((m_AttributeFlags & ECharAttributeFlags.Defense) == ECharAttributeFlags.Defense)
+        {
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[2], x => m_Sprite_PolyStatus.VerticesDistance[2] = x, 1.0f, 0.5f).SetDelay(0.15f);
+        }
+        else
+        {
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[2], x => m_Sprite_PolyStatus.VerticesDistance[2] = x, 0.5f, 0.5f).SetDelay(0.15f);
+        }
+
+        if ((m_AttributeFlags & ECharAttributeFlags.Critical) == ECharAttributeFlags.Critical)
+        {
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[3], x => m_Sprite_PolyStatus.VerticesDistance[3] = x, 1.0f, 0.5f).SetDelay(0.15f);
+        }
+        else
+        {
+            DOTween.To(() => m_Sprite_PolyStatus.VerticesDistance[3], x => m_Sprite_PolyStatus.VerticesDistance[3] = x, 0.5f, 0.5f).SetDelay(0.15f);
+        }
