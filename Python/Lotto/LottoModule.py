@@ -5,10 +5,10 @@ Python 버전
 import random as rand;
 import time as t;
 
-class Lotto( object ):
+class LottoModule( object ):
     """ 로또 번호 생성기 """
 
-    def __init__(self):
+    def __init__( self ):
         self.__InitializeValue();# 초기화 및 번수 선언
     #__init__
 

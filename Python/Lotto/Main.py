@@ -1,7 +1,7 @@
-import Lotto as lt;
+import LottoModule as lt;
 
 
-def get_new_lotto_numbers( lotto:lt.Lotto ):
+def get_new_lotto_numbers( lotto:lt.LottoModule ):
     """ 이번주 로또 번호를 생성한다. """
 
     # 값을 계속 돌려서 전주와 동일한 번호가 나올떄 까지 뽑는다.
@@ -14,7 +14,7 @@ def get_new_lotto_numbers( lotto:lt.Lotto ):
 
 def run():
     #로또 객체 생성
-    lotto = lt.Lotto();
+    lotto = lt.LottoModule();
 
     # todo: 이후 웹크롤링을 통해 지난 번호를 가져와야 한다.
     lottoNums = lotto.MakeLottoNumbers();
