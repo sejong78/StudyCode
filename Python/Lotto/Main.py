@@ -1,5 +1,5 @@
 import LottoModule as lt;
-
+import WebCrawlerModule as wcm;
 
 def get_new_lotto_numbers( lotto:lt.LottoModule ):
     """ 이번주 로또 번호를 생성한다. """
@@ -20,6 +20,11 @@ def run():
     lottoNums = lotto.MakeLottoNumbers();
     lotto.SetLastLottoInfo( 1, lottoNums[0], lottoNums[1], lottoNums[2], lottoNums[3], lottoNums[4], lottoNums[5] );
 
+    webcrawler =  wcm.WebCrawlerModule();
+    webcrawler.GetHtml( "http://www.naver.com" );
+
+    print( f"웹크롤링" );
+    return ;
     lottoNums_1 = get_new_lotto_numbers( lotto );
     lottoNums_2 = get_new_lotto_numbers( lotto );
     lottoNums_3 = get_new_lotto_numbers( lotto );
