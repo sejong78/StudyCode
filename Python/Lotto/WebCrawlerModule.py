@@ -21,10 +21,9 @@ class WebCrawlerModule( object ):
     #__InitializeValue
 
     def GetHtml( self, url:str ):
+        """ url 에 해당하는 html 을 리턴 """
         html = URL( url );
         bsObject = BS( html, "html.parser" )
-
-        print( bsObject );
 
         return bsObject;
         #GetHtml
