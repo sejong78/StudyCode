@@ -36,7 +36,7 @@ def run():
     telegram = TM.TelegramModule();
 
     #지난주 정보 푸시
-    msg = f"지난 {last_index}회차 로또 당첨번호\n {last_num1}, {last_num2}, {last_num3}, {last_num4}, {last_num5}, {last_num6}\n를 바탕으로 {last_index + 1} 회차 번호 생성 합니다.";
+    msg = f"지난 {last_index}회차 로또 당첨번호\n {last_num1}, {last_num2}, {last_num3}, {last_num4}, {last_num5}, {last_num6}\n를 바탕으로 로또 번호 생성 합니다.";
     telegram.SendMessageToGroupLotto( msg );
 
     #로또 객체 생성
