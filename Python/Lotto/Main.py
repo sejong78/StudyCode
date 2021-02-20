@@ -17,7 +17,7 @@ def get_new_lotto_numbers( lotto:LM.LottoModule ):
         if 60 < elapse_time:
             total_time += elapse_time;
             start_time = TIME.time();
-            print( f"번호 생성을 시작한지 {TIME.convert_seconds_to_time( total_time )} 지났습니다." );
+            print( f"번호 생성을 시작한지 {TIME.convert_seconds_to_kor_time( total_time )} 지났습니다." );
 
     print( f"{TIME.convert_seconds_to_time( total_time )} 만에 번호생성을 완료했습니다." );
     # 지난번꺼랑 같아 졌으니 이번주 번호를 리턴
@@ -28,7 +28,7 @@ def parse_last_info( lastinfo:str ):
     """ex>동행복권 950회 당첨번호 3,4,15,22,28,40+10. 1등 총 8명, 1인당 당첨금액 3,281,920,500원."""
     numbers = STR_RE.findall( "\d+", lastinfo );
 
-    return numbers[0], numbers[1], numbers[2], numbers[3], numbers[4], numbers[5], numbers[6];
+    return int(numbers[0]), int(numbers[1]), int(numbers[2]), int(numbers[3]), int(numbers[4]), int(numbers[5]), int(numbers[6]);
 #parse_last_info
 
 def run():
