@@ -2,14 +2,24 @@ import LottoModule as LM;
 import WebCrawlerModule as WM;
 import TelegramModule as TM;
 import re as STR_RE;
+import TimeModule as TIME;
 
 def get_new_lotto_numbers( lotto:LM.LottoModule ):
     """ 이번주 로또 번호를 생성한다. """
 
+    start_time : float = TIME.time();
+    total_time : float = 0.0;
+    elapse_time : float = 0.0;
+
     # 값을 계속 돌려서 전주와 동일한 번호가 나올떄 까지 뽑는다.
     while not lotto.CompareWithLastLottoNumbers( lotto.MakeLottoNumbers() ):
-        pass;
+        elapse_time = TIME.time() - start_time;
+        if 60 < elapse_time:
+            total_time += elapse_time;
+            start_time = TIME.time();
+            print( f"번호 생성을 시작한지 {TIME.convert_seconds_to_time( total_time )} 지났습니다." );
 
+    print( f"{TIME.convert_seconds_to_time( total_time )} 만에 번호생성을 완료했습니다." );
     # 지난번꺼랑 같아 졌으니 이번주 번호를 리턴
     return lotto.MakeLottoNumbers();
 #get_new_lotto_numbers
@@ -46,12 +56,16 @@ def run():
     lotto.SetLastLottoInfo( last_index, last_num1, last_num2, last_num3, last_num4, last_num5, last_num6 );
 
     # 이번주 번호 로직 동작
+    print( f"첫번째 번호생성을 시작합니다." );
     lottoNums_1 = get_new_lotto_numbers( lotto );
+    print( f"두번째 번호생성을 시작합니다." );
     lottoNums_2 = get_new_lotto_numbers( lotto );
+    print( f"세번째 번호생성을 시작합니다." );
     lottoNums_3 = get_new_lotto_numbers( lotto );
+    print( f"네번째 번호생성을 시작합니다." );
     lottoNums_4 = get_new_lotto_numbers( lotto );
+    print( f"다섯번째 번호생성을 시작합니다." );
     lottoNums_5 = get_new_lotto_numbers( lotto );
-
 
     msg = f"로또 번호 생성이 완료 되었습니다.\n{ lottoNums_1 }\n{ lottoNums_2 }\n{ lottoNums_3 }\n{ lottoNums_4 }\n{ lottoNums_5 }\n행운을 빕니다!";
     telegram.SendMessageToGroupLotto( msg );

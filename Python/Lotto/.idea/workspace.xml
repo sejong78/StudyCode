@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="75d6fc09-cac2-4a35-bc73-75d1229a6b3c" name="Default Changelist" comment="웹 크롤링을 위한 모듈 추가">
+      <change afterPath="$PROJECT_DIR$/TimeModule.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
     </list>
@@ -41,7 +42,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Python.Main">
+  <component name="RunManager" selected="Python.LottoModule">
     <configuration name="LottoModule (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Lotto" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -107,8 +108,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Main" />
         <item itemvalue="Python.LottoModule" />
+        <item itemvalue="Python.Main" />
         <item itemvalue="Python.LottoModule (1)" />
       </list>
     </recent_temporary>
