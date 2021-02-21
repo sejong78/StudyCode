@@ -26,6 +26,8 @@ def get_new_lotto_numbers( lotto:LM.LottoModule ):
 
 def parse_last_info( lastinfo:str ):
     """ex>동행복권 950회 당첨번호 3,4,15,22,28,40+10. 1등 총 8명, 1인당 당첨금액 3,281,920,500원."""
+
+    #문장안에서 수만( "\d" 옵션이면 숫자만 ) 뽑아서 문자열 리스트로 뽑아준다.
     numbers = STR_RE.findall( "\d+", lastinfo );
 
     return int(numbers[0]), int(numbers[1]), int(numbers[2]), int(numbers[3]), int(numbers[4]), int(numbers[5]), int(numbers[6]);
