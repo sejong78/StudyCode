@@ -69,7 +69,7 @@ def run():
     print( f"다섯번째 번호생성을 시작합니다." );
     lottoNums_5 = get_new_lotto_numbers( lotto );
 
-    msg = f"로또 번호 생성이 완료 되었습니다.\n{ lottoNums_1 }\n{ lottoNums_2 }\n{ lottoNums_3 }\n{ lottoNums_4 }\n{ lottoNums_5 }\n행운을 빕니다!";
+    msg = f"{last_index + 1}회차 로또 번호 생성이 완료 되었습니다.\n{ lottoNums_1 }\n{ lottoNums_2 }\n{ lottoNums_3 }\n{ lottoNums_4 }\n{ lottoNums_5 }\n행운을 빕니다!";
     telegram.SendMessageToGroupLotto( msg );
 
 #run
