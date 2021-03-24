@@ -234,14 +234,25 @@ class ThreadWorker( QThread ):
                 mutex.unlock();
 
         mutex.lock();
-
         try:
+            #최종적으로 동일한 번호를 얻었기 때문에, 다음 값을 가져온다.
+            nums = self.owner.m_lotto.MakeLottoNumbers();
+
+            vm.row = self.row;
+            vm.col1 = nums[0];
+            vm.col2 = nums[1];
+            vm.col3 = nums[2];
+            vm.col4 = nums[3];
+            vm.col5 = nums[4];
+            vm.col6 = nums[5];
+
             # 값을 세팅한다.
             self.onEvent_SetNumber.emit( vm );
-            self.stop();
-
         finally:
             mutex.unlock();
+
+        self.quit();
+        self.wait( 5000 );  # 5000ms = 5s
     # run
 
 # ThreadWorker
