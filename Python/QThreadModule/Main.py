@@ -2,8 +2,8 @@ from PyQt5.QtCore import *;
 from  PyQt5.QtWidgets import  *;
 import sys;
 
-class MyDialog( QDialog ):
-    """ GUI 다이얼로그  """
+class MyDialogForm( QDialog ):
+    """ GUI 다이얼로그 Form """
     def __init__( self, parent = None ):
         super().__init__( parent );
 
@@ -27,9 +27,10 @@ class MyDialog( QDialog ):
 
 # MyDialog
 
-class Test:
+class TestModel:
+    """ 스레드 통신에 사용할 정보 모델 """
     def __init__( self ):
-        name = "";
+        self.msg = "";
     # __init__
 # Test
 
@@ -46,10 +47,12 @@ class Worker( QThread ):
 
     def __del__( self ):
         print( "... end thread ..." );
-        self.wait();
+        if self.is_working == True:
+            self.wait();
     # __del__
 
     def run( self ):
+        """ 스레드 중요 업데이트 함수 """
         while self.is_working:
             self.qt_signal_second_changed.emit( f"time(secs) : {self.sec}" );
             self.sleep(1);
@@ -64,12 +67,12 @@ class Worker( QThread ):
 
     @pyqtSlot( "PyQt_PyObject" )
     def recive_instance_signal( self, inst ):
-        print( inst.name );
+        print( inst.msg );
     # recive_instance_signal
 
 # Worker
 
-class MyMain( MyDialog ):
+class MyMain( MyDialogForm ):
     """ MyDialog 상속받은 제어클레스 """
     qt_signal_add_seconds = pyqtSignal();
     qt_signal_send_instance = pyqtSignal( "PyQt_PyObject" );
@@ -82,25 +85,30 @@ class MyMain( MyDialog ):
         self.qbtn3.clicked.connect( self.add_sec );
         self.qbtn4.clicked.connect( self.send_instance );
 
-        self.thread = Worker( parent = self );
-        self.thread.qt_signal_second_changed.connect( self.time_update );
+        # Thread 할당
+        self.myThread = Worker( parent = self );
 
-        self.qt_signal_add_seconds.connect( self.thread.add_sec );
-        self.qt_signal_send_instance.connect( self.thread.recive_instance_signal );
+        # Thread 에서 제어 클레스로 통신 - Thread signal 에 제어 클레스의 함수 연결
+        self.myThread.qt_signal_second_changed.connect( self.time_update );
 
+        # 제어클레스에서 Thread 로 통신 - 제어 클레스의 signal 에 Thread 함수 연결
+        self.qt_signal_add_seconds.connect( self.myThread.add_sec );
+        self.qt_signal_send_instance.connect( self.myThread.recive_instance_signal );
+
+        # 다이얼로그 출력
         self.show();
 
     # __init__
 
     @pyqtSlot()
     def time_start( self ):
-        self.thread.start();
-        self.thread.is_working = True;
+        self.myThread.start();
+        self.myThread.is_working = True;
     # time_start
 
     @pyqtSlot()
     def time_stop( self ):
-        self.thread.is_working = False;
+        self.myThread.is_working = False;
     # time_stop
 
     @pyqtSlot()
@@ -116,8 +124,8 @@ class MyMain( MyDialog ):
 
     @pyqtSlot()
     def send_instance( self ):
-        t1 = Test();
-        t1.name = "Super Power!!!";
+        t1 = TestModel();
+        t1.msg = "Super Power!!!";
 
         self.qt_signal_send_instance.emit( t1 );
     # send_instance
