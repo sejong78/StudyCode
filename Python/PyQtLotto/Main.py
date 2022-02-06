@@ -56,7 +56,7 @@ class WindowClass( QMainWindow, ui_lotto_frame ):
         find_msgs = crawled_html.head.find( "meta", { "name": "description" } ).get( 'content' );
         print( f"{find_msgs}" );
 
-        last_index, last_num1, last_num2, last_num3, last_num4, last_num5, last_num6 = self.parse_last_info( find_msgs ); #문장 내용중 필요내용 파싱
+        last_index, last_num1, last_num2, last_num3, last_num4, last_num5, last_num6 = self.parse_last_info( find_msgs ); #문장 내용중 필요 내용 파싱
         print( f"last_index = {last_index}, last_num1 = {last_num1}, last_num2 = {last_num2}, last_num3 = {last_num3}, last_num4 = {last_num4}, last_num5 = {last_num5}, last_num6 = {last_num6}" );
 
         # 지난 회차 + 1 해서 이번회차
