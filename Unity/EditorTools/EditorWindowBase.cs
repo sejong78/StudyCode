@@ -1,5 +1,5 @@
 /**---------------------------------------------------------------------------------
- * @file EditotWindowBase.cs
+ * @file EditorWindowBase.cs
  * @date 2021/10/25
  * @author sejong
  * @brief Unity 에디터 윈도우 Base
@@ -9,14 +9,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using static UnityEditor.EditorGUILayout;
+using UnityEngine.UI;
 
 /**---------------------------------------------------------------------------------
- * @file EditotWindowBase.cs
+ * @file EditorWindowBase.cs
  * @date 2021/10/25
  * @author sejong
  * @brief Unity 에디터 윈도우 Base Class
  *///-------------------------------------------------------------------------------
-public abstract class EditotWindowBase : EditorWindow
+public abstract class EditorWindowBase : EditorWindow
 {
 	//@@-------------------------------------------------------------------------------------------------------------------------
 	//@@-------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +31,7 @@ public abstract class EditotWindowBase : EditorWindow
 	/// <summary>
 	/// 컨트롤용 윈도우 클레스
 	/// </summary>
-	protected EditotWindowBase _baseWindow = null;
+	protected EditorWindowBase _baseWindow = null;
 
 	/// <summary>
 	/// 텍스트 기본
@@ -57,26 +59,21 @@ public abstract class EditotWindowBase : EditorWindow
 	/// <summary>
 	/// 초기화 함수. 에디터 윈도우 기동시 호출
 	/// </summary>
-	protected virtual void Initialize( EditotWindowBase win )
+	protected virtual void Initialize( EditorWindowBase win )
 	{
 		_baseWindow = win;
-	}
+    }
 
-	//@@-------------------------------------------------------------------------------------------------------------------------
+    //@@-------------------------------------------------------------------------------------------------------------------------
 
-	/// <summary>
-	/// 텍스트 쓰기
-	/// </summary>
-	/// <param name="text"></param>
-	/// <param name="width"></param>
-	protected void DrawText( string text, float width = -1f )
+    /// <summary>
+    /// 텍스트 쓰기
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="width"></param>
+    protected void DrawText( string text, float width = -1f )
 	{
-		if( width < 0 )
-			width = _fontWidth * ( text.Length + 1 );
-
-		GUI.color = _defaultTextColor;
-
-		EditorGUILayout.LabelField( text, GUILayout.Width( width ) );
+		DrawText( text, _defaultTextColor, width );
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
@@ -94,7 +91,7 @@ public abstract class EditotWindowBase : EditorWindow
 
 		GUI.color = color;
 
-		EditorGUILayout.LabelField( text, GUILayout.Width( width ) );
+		EditorGUILayout.LabelField( text, GUILayout.Width( width ));
 
 		GUI.color = _defaultTextColor;
 	}
@@ -102,18 +99,41 @@ public abstract class EditotWindowBase : EditorWindow
 	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	/// <summary>
-	/// 라벨 필드 쓰기
+	/// 텍스트 쓰기
 	/// </summary>
-	/// <param name="key"></param>
-	/// <param name="value"></param>
-	/// <param name="width"></param>
-	protected void DrawLabel( string key, string value, float width = 280f )
+	/// <param name="text"></param>
+	protected void DrawTextSizedBox( string text )
 	{
-		width = Mathf.Max( width, _defaultFieldWidth );
+		DrawTextSizedBox( text, _defaultTextColor );
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 텍스트 쓰기
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="color"></param>
+	protected void DrawTextSizedBox( string text, Color color )
+	{
+		GUI.color = color;
+
+		EditorGUILayout.TextArea(text);
 
 		GUI.color = _defaultTextColor;
+	}
 
-		EditorGUILayout.LabelField( key, value, GUILayout.Width( width ) );
+    //@@-------------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 라벨 필드 쓰기
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="width"></param>
+    protected void DrawLabel( string key, string value, float width = 280f )
+	{
+		DrawLabel( key, value, _defaultTextColor, width );
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
@@ -140,17 +160,7 @@ public abstract class EditotWindowBase : EditorWindow
 
 	protected void InputField_Int( string key, int value, float width = 280f, Action<int> onChanged = null )
 	{
-		width = Mathf.Max( width, _defaultFieldWidth );
-
-		EditorGUI.BeginChangeCheck();
-
-		GUI.color = _defaultTextColor;
-		int val = EditorGUILayout.IntField( key, value, GUILayout.Width( width ) );
-
-		if( EditorGUI.EndChangeCheck() == true && onChanged != null )
-		{
-			onChanged( val );
-		}
+		InputField_Int( key, value, _defaultTextColor, width, onChanged );
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
@@ -176,17 +186,7 @@ public abstract class EditotWindowBase : EditorWindow
 
 	protected void InputField_Float( string key, float value, float width = 280f, Action<float> onChanged = null )
 	{
-		width = Mathf.Max( width, _defaultFieldWidth );
-
-		EditorGUI.BeginChangeCheck();
-
-		GUI.color = _defaultTextColor;
-		float val = EditorGUILayout.FloatField( key, value, GUILayout.Width( width ) );
-
-		if( EditorGUI.EndChangeCheck() == true && onChanged != null )
-		{
-			onChanged( val );
-		}
+		InputField_Float( key, value, _defaultTextColor, width, onChanged );
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
@@ -211,22 +211,13 @@ public abstract class EditotWindowBase : EditorWindow
 	
 	protected void InputField_String( string key, string value, float width = 280f, Action<string> onChanged = null )
 	{
-		width = Mathf.Max( width, _defaultFieldWidth );
-
-		EditorGUI.BeginChangeCheck();
-
-		GUI.color = _defaultTextColor;
-		string val = EditorGUILayout.TextField( key, value, GUILayout.Width( width ) );
-
-		if( EditorGUI.EndChangeCheck() == true && onChanged != null )
-		{
-			onChanged( val );
-		}
+		InputField_String( key, value, _defaultTextColor, width, onChanged );
 	}
 
-	//@@-------------------------------------------------------------------------------------------------------------------------
 
-	protected void InputField_String( string key, string value, Color color, float width = 280f, Action<string> onChanged = null )
+    //@@-------------------------------------------------------------------------------------------------------------------------
+
+    protected void InputField_String( string key, string value, Color color, float width = 280f, Action<string> onChanged = null )
 	{
 		width = Mathf.Max( width, _defaultFieldWidth );
 
@@ -246,17 +237,7 @@ public abstract class EditotWindowBase : EditorWindow
 
 	protected void Slider_Int( string key, int value, int minVal, int maxVal, float width = 280f, Action<int> onChanged = null )
 	{
-		width = Mathf.Max( width, _defaultFieldWidth );
-
-		EditorGUI.BeginChangeCheck();
-
-		GUI.color = _defaultTextColor;
-		int val = EditorGUILayout.IntSlider( key, value, minVal, maxVal, GUILayout.Width( width ) );
-
-		if( EditorGUI.EndChangeCheck() == true && onChanged != null )
-		{
-			onChanged( val );
-		}
+		Slider_Int( key, value, minVal, maxVal, _defaultTextColor, width, onChanged );
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
@@ -281,17 +262,7 @@ public abstract class EditotWindowBase : EditorWindow
 	
 	protected void Slider_float( string key, float value, float minVal, float maxVal, float width = 280f, Action<float> onChanged = null )
 	{
-		width = Mathf.Max( width, _defaultFieldWidth );
-
-		EditorGUI.BeginChangeCheck();
-
-		GUI.color = _defaultTextColor;
-		float val = EditorGUILayout.Slider( key, value, minVal, maxVal, GUILayout.Width( width ) );
-
-		if( EditorGUI.EndChangeCheck() == true && onChanged != null )
-		{
-			onChanged( val );
-		}
+		Slider_float( key, value, minVal, maxVal, _defaultTextColor, width, onChanged );
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
@@ -385,16 +356,19 @@ public abstract class EditotWindowBase : EditorWindow
 	/// </summary>
 	protected void OnGUI()
 	{
-		if( _baseWindow == null )
+		// Check if any control was changed inside a block of code.
+		EditorGUI.BeginChangeCheck();
+
+		if ( _baseWindow == null )
 		{
-			_baseWindow = EditorWindow.GetWindow<EditotWindowBase>();
-		}
+			_baseWindow = EditorWindow.GetWindow<EditorWindowBase>();
+        }
 
 		DivLine.Update( _baseWindow );
-
+		EditorGUILayout.BeginVertical();
 		_scrollPos = EditorGUILayout.BeginScrollView( _scrollPos );
 
-		if( _baseWindow == null )
+		if ( _baseWindow == null )
 		{
 			DrawText( "초기화가 되어있지 않습니다.", Color.red );
 
@@ -402,18 +376,26 @@ public abstract class EditotWindowBase : EditorWindow
 			return;
 		}
 
-		OnDraw();
+        OnDraw();
 
 		EditorGUILayout.EndScrollView();
+		EditorGUILayout.EndVertical();
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
-	//@@-------------------------------------------------------------------------------------------------------------------------
 
-	/// <summary>
-	/// 화면 분할 선
-	/// </summary>
-	public static class DivLine
+	public void OnInspectorUpdate()
+    {
+        Repaint();
+    }
+
+    //@@-------------------------------------------------------------------------------------------------------------------------
+    //@@-------------------------------------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// 화면 분할 선
+    /// </summary>
+    public static class DivLine
 	{
 		//@@-------------------------------------------------------------------------------------------------------------------------
 		//@@-------------------------------------------------------------------------------------------------------------------------
@@ -436,7 +418,7 @@ public abstract class EditotWindowBase : EditorWindow
 		//@@-------------------------------------------------------------------------------------------------------------------------
 		//@@-------------------------------------------------------------------------------------------------------------------------
 
-		public static void Update( EditotWindowBase win )
+		public static void Update( EditorWindowBase win )
 		{
 			int width = (int)win.position.width;
 
@@ -452,7 +434,6 @@ public abstract class EditotWindowBase : EditorWindow
 				++StringCount;
 				DivLineString += "=";
 			}
-
 		}
 
 		//@@-------------------------------------------------------------------------------------------------------------------------
