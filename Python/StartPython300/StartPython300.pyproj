@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2e366f9f-bd30-480b-a51e-bb218610423b}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>004_파이썬_리스트.py</StartupFile>
+    <StartupFile>006_파이썬_딕셔너리.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -27,6 +27,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="004_파이썬_리스트.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="005_파이썬_튜플.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="006_파이썬_딕셔너리.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
