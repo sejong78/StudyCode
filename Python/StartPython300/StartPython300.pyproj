@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2e366f9f-bd30-480b-a51e-bb218610423b}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>006_파이썬_딕셔너리.py</StartupFile>
+    <StartupFile>007_파이썬_분기문.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -33,6 +33,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="006_파이썬_딕셔너리.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="007_파이썬_분기문.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
