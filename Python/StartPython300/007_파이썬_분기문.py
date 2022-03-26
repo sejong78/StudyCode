@@ -1,3 +1,5 @@
+import requests;
+
 if 4 < 3:
     print( "Hello World!" );
 else:
@@ -102,3 +104,18 @@ if int(주민번호[12]) == check:
     print( "유효한 주민등록번호입니다." );
 else:
     print( "유효 하지 않은 주민등록번호입니다." );
+
+
+btc = requests.get("https://api.bithumb.com/public/ticker/").json()["data"];
+print( f"최근 24시간 내 시작 거래금액 = {btc['opening_price']}" );
+print( f"최근 24시간 내 마지막 거래금액 = {btc['closing_price']}" );
+print( f"최근 24시간 내 최저 거래금액 = {btc['min_price']}" );
+print( f"최근 24시간 내 최고 거래금액 = {btc['max_price']}" );
+시가   = int( btc["opening_price"] );
+최고가 = int( btc["max_price"] );
+변동폭 = 최고가 - int( btc["min_price"] );
+if 최고가 < 시가 + 변동폭:
+    print( "상승장" );
+else:
+    print( "하락장" );
+
