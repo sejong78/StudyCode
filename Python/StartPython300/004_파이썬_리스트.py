@@ -61,3 +61,9 @@ print( data );
 Tuple_Datas = [ (1, 2), (0, 1), (5, 1), (5, 2), (3, 0) ];
 print( sorted( Tuple_Datas, key=lambda x:x[0] ) );
 print( sorted( Tuple_Datas, key=lambda x:(x[0], -x[1]) ) );
+
+apart = [ [ "101호", "102호" ], [ "201호", "202호" ], [ "301호", "302호" ] ];
+print( apart );
+
+stock = [ [ "시가", 100, 200, 300 ], [ "종가", 80, 210, 330 ] ];
+print( stock );

@@ -33,3 +33,7 @@ keys = ("apple", "pear", "peach");
 vals = [300, 250, 400];
 result = dict( zip( keys, vals ) );
 print( result );
+
+stock = { "시가": [100, 200, 300], "종가": [80, 210, 330] };
+print( stock );
+

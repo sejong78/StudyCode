@@ -74,3 +74,35 @@ volatility  = [];
 for idx in range( 0, len(low_prices) ):
     volatility.append( high_prices[idx] - low_prices[idx] );
 print( volatility );
+
+print( "" );
+apart = [ [101, 102], [201, 202], [301, 302] ]
+for i in apart:
+    for j in i:
+        print( f"{j} 호" );
+
+print( "" );
+apart = [ [101, 102], [201, 202], [301, 302] ]
+for i in apart[::-1]:
+    for j in i[::-1]:
+        print( f"{j} 호" );
+
+print( "" );
+data = [ [ 2000,  3050,  2050,  1980],
+         [ 7500,  2050,  2050,  1980],
+         [15450, 15050, 15550, 14900] ];
+result = [];
+for i in data:
+    for j in i:
+        result.append( j * 1.00014 );
+print( result );
+
+print( "" );
+ohlc = [["open", "high", "low", "close"],
+        [100, 110, 70, 100],
+        [200, 210, 180, 190],
+        [300, 310, 300, 310]];
+for row in ohlc[ 1:: ]:
+    close_val = row[-1];
+    if row[0] <= close_val:
+        print( close_val );
