@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2e366f9f-bd30-480b-a51e-bb218610423b}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>008_파이썬_반복문_02.py</StartupFile>
+    <StartupFile>010_파이썬_모듈.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -42,6 +42,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="008_파이썬_반복문_02.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="009_파이썬_함수_01.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="009_파이썬_함수_02.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="010_파이썬_모듈.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
