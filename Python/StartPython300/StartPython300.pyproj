@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2e366f9f-bd30-480b-a51e-bb218610423b}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>011_파이썬_클래스_04.py</StartupFile>
+    <StartupFile>012_파일_입출력과_예외처리.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -63,6 +63,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="011_파이썬_클래스_04.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="012_파일_입출력과_예외처리.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
