@@ -1,20 +1,26 @@
-import pyautogui as pag;
+import pyautogui as mr;
+import pygetwindow as gw;
 
-sr = pag.size();
+sr = mr.size();
 print( sr );
 
-mpt = pag.position();
+mpt = mr.position();
 print( mpt );
 
-pag.moveTo( 100, 100 );
+mr.moveTo( 100, 100 );
 
-pag.alert( "경고!!" );
+mr.alert( "경고!!" );
 
-vars = pag.confirm( "확인은 OK, 취소는 Cancel" );
+vars = mr.confirm( "확인은 OK, 취소는 Cancel" );
 if vars is "OK":
     print( "확인을 눌렀구만" );
 else:
     print( "취소를 눌렀구만" );
 
-pag.screenshot( "foo.png" );
+mr.screenshot( "foo.png" );
 
+chrome = gw.getWindowsWithTitle( "Chrome" )[0];
+
+chrome.activate();
+
+mr.click(chrome.center);
