@@ -1,1 +1,7 @@
 StudyCodeProject/Temp/
+StudyCodeProject/Library/Artifacts/
+*.vsidx
+StudyCodeProject/Logs/
+StudyCodeProject/obj/
+StudyCodeProject/Library/
+StudyCodeProject/.vs/
