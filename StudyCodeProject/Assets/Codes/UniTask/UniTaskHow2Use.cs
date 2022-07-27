@@ -49,6 +49,22 @@ public class UniTaskHow2Use : MonoBehaviour
 	//@@-------------------------------------------------------------------------------------------------------------------------
 	//@@-------------------------------------------------------------------------------------------------------------------------
 
+	private void OnProgress_WebRequest( float prog )
+	{
+		Debug.Log( $"[WebRequest] Prog : {prog:p0}" );
+	}
+
+	private void OnProgress_LoadScene( float prog )
+	{
+		Debug.Log( $"[LoadScene] Prog : {prog:p0}" );
+	}
+
+	private void OnProgress_LoadResource( float prog )
+	{
+		Debug.Log( $"[LoadResource] Prog : {prog:p0}" );
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	/// <summary>
 	/// MonoBehaviour 의 Start 를 사용할 수 있다.
@@ -66,11 +82,12 @@ public class UniTaskHow2Use : MonoBehaviour
 		await UniTask.Delay( 1000 );
 		UniTaskManager.INSTANCE.CancelTask( "Test" );
 
-		var txt = await UniTaskManager.INSTANCE.WebRequest( "https://www.google.co.jp/" );
+		var txt = await UniTaskManager.INSTANCE.WebRequest( "https://www.google.co.jp/", onProgress: OnProgress_WebRequest );
 		Debug.Log( txt );
 
+		await UniTaskManager.INSTANCE.LoadScene( "SampleAddScene", UnityEngine.SceneManagement.LoadSceneMode.Additive, onProgress: OnProgress_LoadScene );
 
-		var go = await UniTaskManager.INSTANCE.ResourceLoad<GameObject>( "Cube" );
+		var go = await UniTaskManager.INSTANCE.LoadResource<GameObject>( "Cube", onProgress: OnProgress_LoadResource );
 
 		/*
 			<color=#0000ff>Check Start!!</color>
@@ -217,7 +234,7 @@ public class UniTaskHow2Use : MonoBehaviour
 	
 	private void Awake()
 	{
-		
+		DontDestroyOnLoad( gameObject );
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------

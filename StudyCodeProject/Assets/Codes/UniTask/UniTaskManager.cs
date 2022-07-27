@@ -12,6 +12,7 @@ using BaseSingleton;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// @class UniTaskManager
@@ -38,7 +39,7 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 	/// <param name="url"></param>
 	/// <param name="cancleKey"></param>
 	/// <returns></returns>
-	public async UniTask<string> WebRequest( string url, string cancleKey = "" )
+	public async UniTask<string> WebRequest( string url, string cancleKey = "", Action<float> onProgress = null )
 	{
 		// Url 이 비어 있다면 무시한다.
 		if( true == string.IsNullOrEmpty( url ) )
@@ -46,14 +47,22 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 		
 		try
 		{
+			// 캔슬 토큰
 			var cancelToken = GetCancellationToken( cancleKey );
-	
-			var wr = UnityWebRequest.Get( url );
-	
-			if( cancelToken == default )
-				await wr.SendWebRequest();
+
+			// 진행도
+			IProgress<float> prog = onProgress != null ? Progress.Create<float>( onProgress ) : null;
+
+			// UnityWebRequest 수령
+			UnityWebRequest wr = UnityWebRequest.Get( url );
+
+			// SendWebRequest 실행
+			UnityWebRequestAsyncOperation wrao = wr.SendWebRequest();
+
+			if( default == cancelToken && null == prog )
+				await wrao;
 			else
-				await wr.SendWebRequest().WithCancellation( cancelToken );
+				await wrao.ToUniTask( progress: prog, cancellationToken: cancelToken );
 
 			switch( wr.result )
 			{
@@ -94,13 +103,54 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	/// <summary>
+	/// 씬을 비동기로 로딩한다.
+	/// </summary>
+	/// <param name="sceneName"></param>
+	/// <param name="mode"></param>
+	/// <param name="cancleKey"></param>
+	/// <param name="onProgress"></param>
+	/// <returns></returns>
+	public async UniTask LoadScene( string sceneName, LoadSceneMode mode = LoadSceneMode.Single, string cancleKey = "", Action<float> onProgress = null )
+	{
+		// sceneName 이 비어 있다면 무시한다.
+		if( true == string.IsNullOrEmpty( sceneName ) )
+			return;
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			// 진행도
+			IProgress<float> prog = onProgress != null ? Progress.Create<float>( onProgress ) : null;
+
+			// 씬 로드 진행
+			AsyncOperation ao = SceneManager.LoadSceneAsync( sceneName, mode );
+
+			if( default == cancelToken && null == prog )
+				await ao;
+			else
+				await ao.ToUniTask( progress: prog, cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] Resources.LoadScene = {ex.Message}" );
+#endif//DEBUG
+
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
 	/// 리소스 로딩을 비동기로 처리한다.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <param name="path"></param>
 	/// <param name="cancleKey"></param>
 	/// <returns></returns>
-	public async UniTask<T> ResourceLoad<T>( string path, string cancleKey = "" ) where T : UnityEngine.Object
+	public async UniTask<T> LoadResource<T>( string path, string cancleKey = "", Action<float> onProgress = null ) where T : UnityEngine.Object
 	{
 		// path 가 비어 있다면 무시한다.
 		if( true == string.IsNullOrEmpty( path ) )
@@ -109,12 +159,20 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 		try
 		{
 			var res = default( UnityEngine.Object );
+
+			// 캔슬 토큰 값이 없으면 default 
 			var cancelToken = GetCancellationToken( cancleKey );
 
-			if( cancelToken == default )
-				res = await Resources.LoadAsync<T>( path );
+			// 진행도
+			IProgress<float> prog = onProgress != null ? Progress.Create<float>( onProgress ) : null;
+
+			// 리소스 로딩 
+			ResourceRequest rr = Resources.LoadAsync<T>( path );
+
+			if( default == cancelToken && null == prog )
+				res = await rr;
 			else
-				res = await Resources.LoadAsync<T>( path ).WithCancellation( cancelToken );
+				res = await rr.ToUniTask( progress: prog, cancellationToken: cancelToken );
 
 			return res as T;
 		}
