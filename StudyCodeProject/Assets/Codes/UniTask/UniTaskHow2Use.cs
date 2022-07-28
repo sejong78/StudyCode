@@ -26,6 +26,10 @@ public class UniTaskHow2Use : MonoBehaviour
 	[SerializeField]
 	private Transform _trObj = null;
 
+	[Range(0, 1)]
+	[SerializeField]
+	private float _value = 0;
+
 	//@@-------------------------------------------------------------------------------------------------------------------------
 	//@@-------------------------------------------------------------------------------------------------------------------------
 
@@ -59,6 +63,11 @@ public class UniTaskHow2Use : MonoBehaviour
 		Debug.Log( $"[LoadScene] Prog : {prog:p0}" );
 	}
 
+	private void OnProgress_UnLoadScene( float prog )
+	{
+		Debug.Log( $"[UnLoadScene] Prog : {prog:p0}" );
+	}
+
 	private void OnProgress_LoadResource( float prog )
 	{
 		Debug.Log( $"[LoadResource] Prog : {prog:p0}" );
@@ -76,16 +85,20 @@ public class UniTaskHow2Use : MonoBehaviour
 
 		// 일반 함수로 비동기로 처리가 가능하다. 단 이경우 .Forget(); 을 추가해야 워닝이 없다.
 		UniTask.RunOnThreadPool( NormalSyncFunction, cancellationToken: testTkn ).Forget();
-		await UniTask.Delay( 10000 );
+		await UniTaskManager.INSTANCE.Delay( 10000 );
 
 		AsynFunction( testTkn ).Forget();
-		await UniTask.Delay( 1000 );
+		await UniTaskManager.INSTANCE.Delay( 1000 );
 		UniTaskManager.INSTANCE.CancelTask( "Test" );
 
 		var txt = await UniTaskManager.INSTANCE.WebRequest( "https://www.google.co.jp/", onProgress: OnProgress_WebRequest );
 		Debug.Log( txt );
 
 		await UniTaskManager.INSTANCE.LoadScene( "SampleAddScene", UnityEngine.SceneManagement.LoadSceneMode.Additive, onProgress: OnProgress_LoadScene );
+
+		await UniTaskManager.INSTANCE.Delay( 1000 );
+
+		await UniTaskManager.INSTANCE.UnLoadScene( "SampleAddScene", UnityEngine.SceneManagement.UnloadSceneOptions.UnloadAllEmbeddedSceneObjects, onProgress: OnProgress_UnLoadScene );
 
 		var go = await UniTaskManager.INSTANCE.LoadResource<GameObject>( "Cube", onProgress: OnProgress_LoadResource );
 

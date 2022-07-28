@@ -34,6 +34,249 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	/// <summary>
+	/// 일반 동기 Action 을 비동기로 처리한다.
+	/// </summary>
+	/// <param name="syncAction"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask Run( Action syncAction, string cancleKey = "" )
+	{
+		if( null == syncAction )
+			return;
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			await UniTask.RunOnThreadPool( syncAction, cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] Run (Action)= {ex.Message}" );
+#endif//DEBUG
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 일반 동기 Function 을 비동기로 처리한다.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="syncFunction"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask<T> Run<T>( Func<T> syncFunction, string cancleKey = "" )
+	{
+		if( null == syncFunction )
+			return default(T);
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			return await UniTask.RunOnThreadPool( syncFunction, cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] Run (Function)= {ex.Message}" );
+#endif//DEBUG
+
+			return default(T);
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 모니터링 하는 값이 변경 될 때 까지 대기
+	/// T 클레스의 U값이 변경될 때 까지 대기
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <typeparam name="U"></typeparam>
+	/// <param name="target"></param>
+	/// <param name="monitorFunc"></param>
+	/// <param name="equalityComparer"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask<U> WaitUntilValueChanged<T,U>( T target, Func<T, U> monitorFunc, IEqualityComparer<U> equalityComparer = null, string cancleKey = "" ) where T : class
+	{
+		if( null == target || null == monitorFunc )
+			return default(U);
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			return await UniTask.WaitUntilValueChanged( target, monitorFunc, equalityComparer: equalityComparer, cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WaitUntilValueChanged = {ex.Message}" );
+#endif//DEBUG
+
+			return default( U );
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 캔슬 될때 까지 대기
+	/// </summary>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask WaitUntilCanceled( string cancleKey )
+	{
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			// 등록이 안된 토큰은 사용할 수 없다.
+			if( default == cancelToken )
+				return;
+	
+			await UniTask.WaitUntilCanceled( cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WaitUntilCanceled = {ex.Message}" );
+#endif//DEBUG
+
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 해당 조건을 만족할때까지 대기\n
+	/// conditionFunc 이 true 를 리턴할때 까지 대기
+	/// </summary>
+	/// <param name="conditionFunc"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask WaitUntil( Func<bool> conditionFunc, string cancleKey = "" )
+	{
+		if( null == conditionFunc )
+			return;
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			await UniTask.WaitUntil( conditionFunc, cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WaitUntil = {ex.Message}" );
+#endif//DEBUG
+
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 해당 조건을 만족하는 동안 대기\n
+	/// conditionFunc 이 false 를 리턴할때 까지 대기
+	/// </summary>
+	/// <param name="conditionFunc"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask WaitWhile( Func<bool> conditionFunc, string cancleKey = "" )
+	{
+		if( null == conditionFunc )
+			return;
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			await UniTask.WaitWhile( conditionFunc, cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WaitWhile = {ex.Message}" );
+#endif//DEBUG
+
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 딜레이 프레임
+	/// </summary>
+	/// <param name="frames"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask DelayFrames( int frames, string cancleKey = "" )
+	{
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+
+			// 딜레이
+			await UniTask.DelayFrame( frames, cancellationToken: cancelToken );
+
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] DelayFrame = {ex.Message}" );
+#endif//DEBUG
+
+		}
+
+	}
+
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 딜레이 밀리초
+	/// </summary>
+	/// <param name="milliseconds"></param>
+	/// <param name="ignoreTimeScale"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask Delay( int milliseconds, bool ignoreTimeScale = false, string cancleKey = "" )
+	{
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+
+			// 딜레이
+			await UniTask.Delay( milliseconds, ignoreTimeScale, cancellationToken: cancelToken );
+
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] Delay = {ex.Message}" );
+#endif//DEBUG
+
+		}
+
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
 	/// Unity 통신
 	/// </summary>
 	/// <param name="url"></param>
@@ -135,7 +378,48 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 		catch( System.Exception ex )
 		{
 #if DEBUG
-			Debug.Log( $"[Exception] Resources.LoadScene = {ex.Message}" );
+			Debug.Log( $"[Exception] SceneManager.LoadSceneAsync = {ex.Message}" );
+#endif//DEBUG
+
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+	
+	/// <summary>
+	/// 씬을 비동기로 언로딩 한다.
+	/// </summary>
+	/// <param name="sceneName"></param>
+	/// <param name="option"></param>
+	/// <param name="cancleKey"></param>
+	/// <param name="onProgress"></param>
+	/// <returns></returns>
+	public async UniTask UnLoadScene( string sceneName, UnloadSceneOptions option = UnloadSceneOptions.None, string cancleKey = "", Action<float> onProgress = null )
+	{
+		// sceneName 이 비어 있다면 무시한다.
+		if( true == string.IsNullOrEmpty( sceneName ) )
+			return;
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+
+			// 진행도
+			IProgress<float> prog = onProgress != null ? Progress.Create<float>( onProgress ) : null;
+
+			// 씬 언로드 진행
+			AsyncOperation ao = SceneManager.UnloadSceneAsync( sceneName, option );
+
+			if( default == cancelToken && null == prog )
+				await ao;
+			else
+				await ao.ToUniTask( progress: prog, cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] SceneManager.UnloadSceneAsync = {ex.Message}" );
 #endif//DEBUG
 
 		}
@@ -197,6 +481,39 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 		var linkedCtn = CancellationTokenSource.CreateLinkedTokenSource( ctns );
 
 		return linkedCtn; 
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 캔슬 토큰을 추가한다.
+	/// </summary>
+	/// <param name="key"></param>
+	/// <param name="cts"></param>
+	public void AddCancellationToken( string key, CancellationTokenSource cts )
+	{
+		// 키가 null 이거나, 토큰 소스가 없으면 pass
+		if( true == string.IsNullOrEmpty( key ) || null == cts )
+			return;
+
+		// 이미 있었으면, 기존의 것과 병합한다.
+		if( true == _cancelTokenDic.ContainsKey( key ) )
+		{
+			// 사용한 적이 있다면 그대로 제거
+			if( true == _cancelTokenDic[ key ].IsCancellationRequested )
+			{
+				_cancelTokenDic[ key ].Dispose();
+				_cancelTokenDic.Remove( key );
+			}
+			// 없다면 기존의 것과 병합
+			else
+			{
+				cts = LinkCancellationToken( _cancelTokenDic[ key ].Token, cts.Token );
+			}
+		}
+
+		// 딕셔너리에 추가
+		_cancelTokenDic[ key ] = cts;
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------

@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trObj: {fileID: 1118883953}
+  _value: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
