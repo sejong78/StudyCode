@@ -84,8 +84,19 @@ public class UniTaskHow2Use : MonoBehaviour
 		var testTkn = UniTaskManager.INSTANCE.GetCancellationToken( "Test" );
 
 		// 일반 함수로 비동기로 처리가 가능하다. 단 이경우 .Forget(); 을 추가해야 워닝이 없다.
-		UniTask.RunOnThreadPool( NormalSyncFunction, cancellationToken: testTkn ).Forget();
-		await UniTaskManager.INSTANCE.Delay( 10000 );
+		UniTaskManager.INSTANCE.Run( NormalSyncFunction, "Test" ).Forget();
+
+		Debug.Log( $"<color=#ff0000>WhenAll Start!!!</color>" );
+		await UniTaskManager.INSTANCE.WhenAll( "",
+			UniTaskManager.INSTANCE.Run( NormalSyncFunction, "Test" ), // 일반 함수로 비동기로 처리가 가능하다.
+			UniTaskManager.INSTANCE.Delay( 20000 ) );
+		Debug.Log( $"<color=#ff0000>WhenAll Done!!!</color>" );
+
+		Debug.Log( $"<color=#ff0000>WhenAny Start!!!</color>" );
+		var rslt = await UniTaskManager.INSTANCE.WhenAny( "",
+					WaitSeconds( 3f ),
+					WaitSeconds( 2f ) );
+		Debug.Log( $"<color=#ff0000>WhenAny Done!!! 먼저 끝난 {rslt.index} 번 비동기함수 의 결과는 {rslt.result} </color>" );
 
 		AsynFunction( testTkn ).Forget();
 		await UniTaskManager.INSTANCE.Delay( 1000 );

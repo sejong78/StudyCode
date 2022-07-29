@@ -34,6 +34,125 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	/// <summary>
+	/// 뭐라도 하나 끝날때 까지 기다린다.\n
+	/// WhenAny 가 종료 되더라도, tasks 비동기 함수들은 계속 실행 된다.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="cancleKey"></param>
+	/// <param name="tasks"></param>
+	/// <returns>(int:가장 먼저 끝난 비동기 함수 인덱스, T:그 결과)</returns>
+	public async UniTask<(int index, T result)> WhenAny<T>( string cancleKey, params UniTask<T>[] tasks )
+	{
+		if( null == tasks || tasks.Length < 1 )
+			return ( 0, default(T) );
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+
+			return await UniTask.WhenAny( tasks ).AttachExternalCancellation( cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WhenAny = {ex.Message}" );
+#endif//DEBUG
+			return (0, default( T ));
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 뭐라도 하나 끝날때 까지 기다린다.\n
+	/// WhenAny 가 종료 되더라도, tasks 비동기 함수들은 계속 실행 된다.
+	/// </summary>
+	/// <param name="cancleKey"></param>
+	/// <param name="tasks"></param>
+	/// <returns>가장 먼저 끝난 비동기 함수 인덱스</returns>
+	public async UniTask<int> WhenAny( string cancleKey, params UniTask[] tasks )
+	{
+		if( null == tasks || tasks.Length < 1 )
+			return 0;
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+
+			return await UniTask.WhenAny( tasks ).AttachExternalCancellation( cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WhenAny = {ex.Message}" );
+#endif//DEBUG
+			return 0;
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// tasks 등록된 모든 비동기 함수가 끝날때 까지 기다린다.
+	/// </summary>
+	/// <param name="cancleKey"></param>
+	/// <param name="tasks"></param>
+	/// <returns></returns>
+	public async UniTask WhenAll( string cancleKey, params UniTask[] tasks )
+	{
+		if( null == tasks || tasks.Length < 1 )
+			return;
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			await UniTask.WhenAll( tasks ).AttachExternalCancellation( cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WhenAll = {ex.Message}" );
+#endif//DEBUG
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+	
+	/// <summary>
+	/// tasks 등록된 모든 비동기 함수가 끝날때 까지 기다린다.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="cancleKey"></param>
+	/// <param name="tasks"></param>
+	/// <returns></returns>
+	public async UniTask<T[]> WhenAll<T>( string cancleKey, params UniTask<T>[] tasks )
+	{
+		if( null == tasks || tasks.Length < 1 )
+			return default( T[] );
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+
+			return await UniTask.WhenAll( tasks ).AttachExternalCancellation( cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WhenAll = {ex.Message}" );
+#endif//DEBUG
+			return default( T[] );
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
 	/// 일반 동기 Action 을 비동기로 처리한다.
 	/// </summary>
 	/// <param name="syncAction"></param>
@@ -48,7 +167,7 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 		{
 			// 캔슬 토큰 값이 없으면 default 
 			var cancelToken = GetCancellationToken( cancleKey );
-	
+
 			await UniTask.RunOnThreadPool( syncAction, cancellationToken: cancelToken );
 		}
 		catch( System.Exception ex )
@@ -87,6 +206,85 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 #endif//DEBUG
 
 			return default(T);
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// 특정 타이밍 까지 대기
+	/// </summary>
+	/// <param name="loopTimming"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask Yield( PlayerLoopTiming loopTimming = PlayerLoopTiming.Update, string cancleKey = "" )
+	{
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			await UniTask.Yield( loopTimming, cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] Yield = {ex.Message}" );
+#endif//DEBUG
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+	
+	/// <summary>
+	/// UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate) 와 완전히 동일하다.
+	/// </summary>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask WaitForEndOfFrame( string cancleKey = "" )
+	{
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			if( default == cancelToken )
+				await UniTask.WaitForEndOfFrame();
+			else
+				await UniTask.WaitForEndOfFrame( cancelToken );
+		}
+		catch (System.Exception ex)
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WaitForEndOfFrame = {ex.Message}" );
+#endif//DEBUG
+		}
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// UniTask.Yield(PlayerLoopTiming.FixedUpdate) 와 완전히 동일하다.
+	/// </summary>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask WaitForFixedUpdate( string cancleKey = "" )
+	{
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+
+			if( default == cancelToken )
+				await UniTask.WaitForFixedUpdate();
+			else
+				await UniTask.WaitForFixedUpdate( cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] WaitForFixedUpdate = {ex.Message}" );
+#endif//DEBUG
 		}
 	}
 
