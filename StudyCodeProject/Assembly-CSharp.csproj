@@ -59,6 +59,7 @@
     <Compile Include="Assets\Codes\Utility\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\Codes\TableParse\BaseTableParser.cs" />
     <Compile Include="Assets\Codes\TableParse\TableLoadingHow2Use.cs" />
+    <Compile Include="Assets\Codes\Utility\DebugExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -273,9 +274,6 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.2f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>Library\ScriptAssemblies\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.2f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
