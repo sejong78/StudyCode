@@ -102,7 +102,7 @@ public class UniTaskHow2Use : MonoBehaviour
 		await UniTaskManager.INSTANCE.Delay( 1000 );
 		UniTaskManager.INSTANCE.CancelTask( "Test" );
 
-		var txt = await UniTaskManager.INSTANCE.WebRequest( "https://www.google.co.jp/", onProgress: OnProgress_WebRequest );
+		var txt = await UniTaskManager.INSTANCE.WebRequest_Get( "https://www.google.co.jp/", onProgress: OnProgress_WebRequest );
 		Debug.Log( txt );
 
 		await UniTaskManager.INSTANCE.LoadScene( "SampleAddScene", UnityEngine.SceneManagement.LoadSceneMode.Additive, onProgress: OnProgress_LoadScene );

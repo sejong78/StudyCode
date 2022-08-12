@@ -1,19 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using LitJson;
 
 public class TableLoadingHow2Use : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    protected async UniTaskVoid Start()
     {
         var myClass = new MyClass();
 
         var clone = DeepCopy.Copy( myClass );
-    }
 
-    // Update is called once per frame
-    void Update()
+		var result = await RESTAPIManager.INSTANCE.Request( 
+            uri:"https://www.google.co.jp/", 
+            cancleKey: "", 
+            "client_id", "testRESTAPI",
+            "client_secret", "",
+            "token", "token" );
+
+        if( true == result.Item1 )
+		{
+            DebugExtensions.Log( $"result.Item2 = {result.Item2}", Color.white );
+        }
+	}
+
+	// Update is called once per frame
+	void Update()
     {
         
     }

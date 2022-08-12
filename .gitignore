@@ -5,3 +5,5 @@ StudyCodeProject/Logs/
 StudyCodeProject/obj/
 StudyCodeProject/Library/
 StudyCodeProject/.vs/
+*.csproj
+*.sln

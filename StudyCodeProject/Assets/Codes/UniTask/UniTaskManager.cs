@@ -210,6 +210,37 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
+	
+	/// <summary>
+	/// 코루틴 함수를 비동기로 처리한다.
+	/// </summary>
+	/// <param name="corutineFunction"></param>
+	/// <param name="cancleKey"></param>
+	/// <returns></returns>
+	public async UniTask Run( IEnumerator corutineFunction, string cancleKey = "" )
+	{
+		if( null == corutineFunction )
+			return;
+
+		try
+		{
+			// 캔슬 토큰 값이 없으면 default 
+			var cancelToken = GetCancellationToken( cancleKey );
+
+			await corutineFunction.WithCancellation( cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] Run (Coroutine)= {ex.Message}" );
+#endif//DEBUG
+
+			return;
+		}
+
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	/// <summary>
 	/// 특정 타이밍 까지 대기
@@ -475,70 +506,152 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	/// <summary>
-	/// Unity 통신
+	/// Unity 통신 Get
+	/// 서버의 데이터나 상태를 변경시키지 않아야 하기 때문에 주로 조회를 할 때에 사용해야 힌다. 
+	/// 브라우저에서 웹페이지를 열어보거나 게시글을 읽는 등 조회시 사용
 	/// </summary>
 	/// <param name="url"></param>
 	/// <param name="cancleKey"></param>
 	/// <returns></returns>
-	public async UniTask<string> WebRequest( string url, string cancleKey = "", Action<float> onProgress = null )
+	public async UniTask<DownloadHandler> WebRequest_Get( string url, string cancleKey = "", Action<UnityWebRequest> setHeader = null, Action<float> onProgress = null )
 	{
 		// Url 이 비어 있다면 무시한다.
 		if( true == string.IsNullOrEmpty( url ) )
-			return "";
+			return null;
 		
 		try
 		{
-			// 캔슬 토큰
-			var cancelToken = GetCancellationToken( cancleKey );
-
-			// 진행도
-			IProgress<float> prog = onProgress != null ? Progress.Create<float>( onProgress ) : null;
-
 			// UnityWebRequest 수령
 			UnityWebRequest wr = UnityWebRequest.Get( url );
 
-			// SendWebRequest 실행
-			UnityWebRequestAsyncOperation wrao = wr.SendWebRequest();
+			// Header 정보가 있다면 세팅
+			setHeader.SafeExcute( wr );
 
-			if( default == cancelToken && null == prog )
-				await wrao;
-			else
-				await wrao.ToUniTask( progress: prog, cancellationToken: cancelToken );
+			// 공통처리
+			bool isSuccess = await ProcessWebRequestResult( wr, cancleKey:cancleKey, onProgress: onProgress );
 
-			switch( wr.result )
-			{
-				case UnityWebRequest.Result.InProgress:
-				{
-#if DEBUG
-					Debug.LogError( $"[Error] UnityWebRequest InProgress!!" );
-#endif//DEBUG
-					return "";
-				}
+			if( false == isSuccess )
+				return null;
 
-				case UnityWebRequest.Result.ConnectionError:
-				case UnityWebRequest.Result.DataProcessingError:
-				case UnityWebRequest.Result.ProtocolError:
-				{
-#if DEBUG
-					Debug.LogError( $"[Error] UnityWebRequest result = {wr.result}\n - {wr.error}" );
-#endif//DEBUG
-					return "";
-				}
-
-				case UnityWebRequest.Result.Success:
-					break;
-			}
-
-			return wr.downloadHandler.text;
+			// 결과
+			return wr.downloadHandler;
 		}
 		catch( System.Exception ex )
 		{
 #if DEBUG
-			Debug.Log( $"[Exception] UnityWebRequest = {ex.Message}" );
+			Debug.Log( $"[Exception] UnityWebRequest_Get = {ex.Message}" );
 #endif//DEBUG
-			return "";
+			return null;
 		}
 
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// Unity 통신 Post
+	/// 서버의 상태나 데이터를 변경시킬 때 사용됨.
+	/// 게시글을 써서 서버에 게시글을 저장하거나, 게시글을 삭제하여 해당 데이터가 없어지는 등 서버의 무언가가 변경될때 사용
+	/// </summary>
+	/// <param name="url"></param>
+	/// <param name="setBody"></param>
+	/// <param name="cancleKey"></param>
+	/// <param name="onProgress"></param>
+	/// <returns></returns>
+	public async UniTask<DownloadHandler> WebRequest_Post( string url, Func<WWWForm> setBody, string cancleKey = "", Action<float> onProgress = null )
+	{
+		// Url 이 비어 있다면 무시한다.
+		if( true == string.IsNullOrEmpty( url ) )
+			return null;
+
+		try
+		{
+			// Body Data 를 체운다.
+			WWWForm body = setBody.SafeExcute();
+
+			// UnityWebRequest 수령
+			UnityWebRequest wr = UnityWebRequest.Post( url, body );
+
+			// 공통처리
+			bool isSuccess = await ProcessWebRequestResult( wr, cancleKey:cancleKey, onProgress: onProgress );
+
+			if( false == isSuccess )
+				return null;
+
+			// 결과
+			return wr.downloadHandler;
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.Log( $"[Exception] UnityWebRequest_Post = {ex.Message}" );
+#endif//DEBUG
+			return null;
+		}
+
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// WebRequest 의 결과 처리
+	/// </summary>
+	/// <param name="wr"></param>
+	/// <returns></returns>
+	private async UniTask<bool> ProcessWebRequestResult( UnityWebRequest wr, string cancleKey = "", Action<float> onProgress = null )
+	{
+		if( null == wr )
+			return false;
+
+		try
+		{
+			// 캔슬 토큰
+			var cancelToken = GetCancellationToken( cancleKey );
+	
+			// 진행도
+			IProgress<float> prog = onProgress != null ? Progress.Create<float>( onProgress ) : null;
+	
+			// SendWebRequest 실행
+			UnityWebRequestAsyncOperation wrao = wr.SendWebRequest();
+	
+			if( default == cancelToken && null == prog )
+				await wrao;
+			else
+				await wrao.ToUniTask( progress: prog, cancellationToken: cancelToken );
+		}
+		catch( System.Exception ex )
+		{
+#if DEBUG
+			Debug.LogError( $"[Error] ProcessWebRequestResult Fail!! => {ex.Message}" );
+#endif//DEBUG
+			return false;
+		}
+
+		switch( wr.result )
+		{
+			case UnityWebRequest.Result.InProgress:
+			{
+#if DEBUG
+				Debug.LogError( $"[Error] UnityWebRequest InProgress!!" );
+#endif//DEBUG
+				return false;
+			}
+
+			case UnityWebRequest.Result.ConnectionError:
+			case UnityWebRequest.Result.DataProcessingError:
+			case UnityWebRequest.Result.ProtocolError:
+			{
+#if DEBUG
+				Debug.LogError( $"[Error] UnityWebRequest result = {wr.result}\n - {wr.error}" );
+#endif//DEBUG
+				return false;
+			}
+
+			case UnityWebRequest.Result.Success:
+				break;
+		}
+
+		return true;
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------

@@ -54,6 +54,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\EditorWindowBase\EditorWindowBase.cs" />
+    <Compile Include="Assets\Codes\Utility\GoogleSheetsForUnity\Scripts\Editor\ContinuationManager.cs" />
+    <Compile Include="Assets\Codes\Utility\GoogleSheetsForUnity\Scripts\Editor\GSFUEditorMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
