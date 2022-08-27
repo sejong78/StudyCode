@@ -1,0 +1,244 @@
+fileFormatVersion: 2
+guid: 551986a630a3b77418024df8b375e6c5
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: B Skirt Bone001
+    100002: B Skirt Bone002
+    100004: B Skirt Bone003
+    100006: B Skirt Point001
+    100008: Bip001
+    100010: Bip001 Head
+    100012: Bip001 L Calf
+    100014: Bip001 L Clavicle
+    100016: Bip001 L Finger0
+    100018: Bip001 L Finger01
+    100020: Bip001 L Finger1
+    100022: Bip001 L Finger11
+    100024: Bip001 L Finger2
+    100026: Bip001 L Finger21
+    100028: Bip001 L Foot
+    100030: Bip001 L Forearm
+    100032: Bip001 L ForeTwist
+    100034: Bip001 L Hand
+    100036: Bip001 L Thigh
+    100038: Bip001 L Toe0
+    100040: Bip001 L UpperArm
+    100042: Bip001 LThighTwist
+    100044: Bip001 Neck
+    100046: Bip001 Pelvis
+    100048: Bip001 Prop1
+    100050: Bip001 R Calf
+    100052: Bip001 R Clavicle
+    100054: Bip001 R Finger0
+    100056: Bip001 R Finger01
+    100058: Bip001 R Finger1
+    100060: Bip001 R Finger11
+    100062: Bip001 R Finger2
+    100064: Bip001 R Finger21
+    100066: Bip001 R Foot
+    100068: Bip001 R Forearm
+    100070: Bip001 R ForeTwist
+    100072: Bip001 R Hand
+    100074: Bip001 R Thigh
+    100076: Bip001 R Toe0
+    100078: Bip001 R UpperArm
+    100080: Bip001 RThighTwist
+    100082: Bip001 Spine
+    100084: Bip001 Spine1
+    100086: Body
+    100088: F Skirt Bone001
+    100090: F Skirt Bone002
+    100092: F Skirt Bone003
+    100094: F Skirt Point001
+    100096: Face
+    100098: Head_Point001
+    100100: L Deltoid Box001
+    100102: L Eye Bone001
+    100104: L Skirt Bone001
+    100106: L Skirt Bone002
+    100108: L Skirt Bone003
+    100110: L Skirt Point001
+    100112: //RootNode
+    100114: Prope Point001
+    100116: R Deltoid Box001
+    100118: R Eye Bone001
+    100120: R Skirt Bone001
+    100122: R Skirt Bone002
+    100124: R Skirt Bone003
+    100126: R Skirt Point001
+    100128: Root
+    100130: WeaponMain
+    100132: Prop Point001
+    100134: Weapon_main
+    100136: Prop Point002
+    100138: Bip001 Prop2
+    100140: Eye_Target
+    100142: L_Eye_TargetPoint001
+    100144: R_Eye_TargetPoint001
+    400000: B Skirt Bone001
+    400002: B Skirt Bone002
+    400004: B Skirt Bone003
+    400006: B Skirt Point001
+    400008: Bip001
+    400010: Bip001 Head
+    400012: Bip001 L Calf
+    400014: Bip001 L Clavicle
+    400016: Bip001 L Finger0
+    400018: Bip001 L Finger01
+    400020: Bip001 L Finger1
+    400022: Bip001 L Finger11
+    400024: Bip001 L Finger2
+    400026: Bip001 L Finger21
+    400028: Bip001 L Foot
+    400030: Bip001 L Forearm
+    400032: Bip001 L ForeTwist
+    400034: Bip001 L Hand
+    400036: Bip001 L Thigh
+    400038: Bip001 L Toe0
+    400040: Bip001 L UpperArm
+    400042: Bip001 LThighTwist
+    400044: Bip001 Neck
+    400046: Bip001 Pelvis
+    400048: Bip001 Prop1
+    400050: Bip001 R Calf
+    400052: Bip001 R Clavicle
+    400054: Bip001 R Finger0
+    400056: Bip001 R Finger01
+    400058: Bip001 R Finger1
+    400060: Bip001 R Finger11
+    400062: Bip001 R Finger2
+    400064: Bip001 R Finger21
+    400066: Bip001 R Foot
+    400068: Bip001 R Forearm
+    400070: Bip001 R ForeTwist
+    400072: Bip001 R Hand
+    400074: Bip001 R Thigh
+    400076: Bip001 R Toe0
+    400078: Bip001 R UpperArm
+    400080: Bip001 RThighTwist
+    400082: Bip001 Spine
+    400084: Bip001 Spine1
+    400086: Body
+    400088: F Skirt Bone001
+    400090: F Skirt Bone002
+    400092: F Skirt Bone003
+    400094: F Skirt Point001
+    400096: Face
+    400098: Head_Point001
+    400100: L Deltoid Box001
+    400102: L Eye Bone001
+    400104: L Skirt Bone001
+    400106: L Skirt Bone002
+    400108: L Skirt Bone003
+    400110: L Skirt Point001
+    400112: //RootNode
+    400114: Prope Point001
+    400116: R Deltoid Box001
+    400118: R Eye Bone001
+    400120: R Skirt Bone001
+    400122: R Skirt Bone002
+    400124: R Skirt Bone003
+    400126: R Skirt Point001
+    400128: Root
+    400130: WeaponMain
+    400132: Prop Point001
+    400134: Weapon_main
+    400136: Prop Point002
+    400138: Bip001 Prop2
+    400140: Eye_Target
+    400142: L_Eye_TargetPoint001
+    400144: R_Eye_TargetPoint001
+    4300000: WeaponMain
+    4300002: Face
+    4300004: Body
+    4300006: Weapon_main
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Body
+    13700002: Face
+    13700004: WeaponMain
+    13700006: Weapon_main
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

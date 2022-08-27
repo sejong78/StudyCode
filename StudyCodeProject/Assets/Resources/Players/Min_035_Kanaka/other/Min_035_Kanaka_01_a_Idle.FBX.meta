@@ -1,0 +1,328 @@
+fileFormatVersion: 2
+guid: a80118f15b79608478f81decf9006fdf
+timeCreated: 1505112944
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: B_Waist_Bone001
+    100002: B_Waist_Point
+    100004: Bip001
+    100006: Bip001 Head
+    100008: Bip001 L Calf
+    100010: Bip001 L Clavicle
+    100012: Bip001 L Finger0
+    100014: Bip001 L Finger01
+    100016: Bip001 L Finger1
+    100018: Bip001 L Finger11
+    100020: Bip001 L Finger2
+    100022: Bip001 L Finger21
+    100024: Bip001 L Foot
+    100026: Bip001 L Forearm
+    100028: Bip001 L ForeTwist
+    100030: Bip001 L Hand
+    100032: Bip001 L Thigh
+    100034: Bip001 L Toe0
+    100036: Bip001 L UpperArm
+    100038: Bip001 LThighTwist
+    100040: Bip001 Neck
+    100042: Bip001 Pelvis
+    100044: Bip001 Prop1
+    100046: Bip001 Prop2
+    100048: Bip001 R Calf
+    100050: Bip001 R Clavicle
+    100052: Bip001 R Finger0
+    100054: Bip001 R Finger01
+    100056: Bip001 R Finger1
+    100058: Bip001 R Finger11
+    100060: Bip001 R Finger2
+    100062: Bip001 R Finger21
+    100064: Bip001 R Foot
+    100066: Bip001 R Forearm
+    100068: Bip001 R ForeTwist
+    100070: Bip001 R Hand
+    100072: Bip001 R Thigh
+    100074: Bip001 R Toe0
+    100076: Bip001 R UpperArm
+    100078: Bip001 RThighTwist
+    100080: Bip001 Spine
+    100082: Bip001 Spine1
+    100084: BL_Waist_Bone001
+    100086: BL_Waist_Bone002
+    100088: BL_Waist_Point
+    100090: BR_Waist_Bone001
+    100092: BR_Waist_Bone002
+    100094: BR_Waist_Point
+    100096: Eye_Point
+    100098: F_Waist_Bone001
+    100100: F_Waist_Point
+    100102: Face
+    100104: FL_Waist_Bone001
+    100106: FL_Waist_Bone002
+    100108: FL_Waist_Bone003
+    100110: FL_Waist_Point
+    100112: FR_Waist_Bone001
+    100114: FR_Waist_Bone002
+    100116: FR_Waist_Bone003
+    100118: FR_Waist_Point
+    100120: L Eye Bone
+    100122: L Eye Point
+    100124: L_CalfLeaf_Bone001
+    100126: L_CalfLeaf_Bone002
+    100128: L_CalfLeaf_Bone003
+    100130: L_CalfLeaf_Bone011
+    100132: L_CalfLeaf_Bone022
+    100134: L_CalfLeaf_Bone033
+    100136: L_CalfLeaf_Bone111
+    100138: L_CalfLeaf_Bone1111
+    100140: L_CalfLeaf_Bone222
+    100142: L_CalfLeaf_Bone2222
+    100144: L_CalfLeaf_Point
+    100146: L_Deltoid_Box001
+    100148: L_Waist_Bone001
+    100150: L_Waist_Point
+    100152: Mask_Box001
+    100154: Mask_Point001
+    100156: //RootNode
+    100158: Prop1_Bone001
+    100160: Prop1_Bone002
+    100162: Prop1_Bone003
+    100164: Prop1_Bone004
+    100166: Prop1_Bone005
+    100168: Prop1_Bone006
+    100170: Prop1_Bone007
+    100172: Prop1_Bone008
+    100174: Prop1_Bone009
+    100176: Prop1_Point001
+    100178: Prop1_Point002
+    100180: Prop1_Point003
+    100182: Prop2_Point
+    100184: R Eye Bone
+    100186: R Eye Point
+    100188: R_ArmLead_Bone001
+    100190: R_ArmLead_Bone002
+    100192: R_ArmLead_Bone011
+    100194: R_ArmLead_Bone022
+    100196: R_ArmLead_Bone111
+    100198: R_ArmLead_Bone1111
+    100200: R_ArmLead_Bone222
+    100202: R_ArmLead_Bone2222
+    100204: R_ArmLead_Point
+    100206: R_Deltoid_Box001
+    100208: R_Waist_Bone001
+    100210: R_Waist_Point
+    100212: Root
+    100214: Waist_Box001
+    100216: Waist_Point
+    400000: B_Waist_Bone001
+    400002: B_Waist_Point
+    400004: Bip001
+    400006: Bip001 Head
+    400008: Bip001 L Calf
+    400010: Bip001 L Clavicle
+    400012: Bip001 L Finger0
+    400014: Bip001 L Finger01
+    400016: Bip001 L Finger1
+    400018: Bip001 L Finger11
+    400020: Bip001 L Finger2
+    400022: Bip001 L Finger21
+    400024: Bip001 L Foot
+    400026: Bip001 L Forearm
+    400028: Bip001 L ForeTwist
+    400030: Bip001 L Hand
+    400032: Bip001 L Thigh
+    400034: Bip001 L Toe0
+    400036: Bip001 L UpperArm
+    400038: Bip001 LThighTwist
+    400040: Bip001 Neck
+    400042: Bip001 Pelvis
+    400044: Bip001 Prop1
+    400046: Bip001 Prop2
+    400048: Bip001 R Calf
+    400050: Bip001 R Clavicle
+    400052: Bip001 R Finger0
+    400054: Bip001 R Finger01
+    400056: Bip001 R Finger1
+    400058: Bip001 R Finger11
+    400060: Bip001 R Finger2
+    400062: Bip001 R Finger21
+    400064: Bip001 R Foot
+    400066: Bip001 R Forearm
+    400068: Bip001 R ForeTwist
+    400070: Bip001 R Hand
+    400072: Bip001 R Thigh
+    400074: Bip001 R Toe0
+    400076: Bip001 R UpperArm
+    400078: Bip001 RThighTwist
+    400080: Bip001 Spine
+    400082: Bip001 Spine1
+    400084: BL_Waist_Bone001
+    400086: BL_Waist_Bone002
+    400088: BL_Waist_Point
+    400090: BR_Waist_Bone001
+    400092: BR_Waist_Bone002
+    400094: BR_Waist_Point
+    400096: Eye_Point
+    400098: F_Waist_Bone001
+    400100: F_Waist_Point
+    400102: Face
+    400104: FL_Waist_Bone001
+    400106: FL_Waist_Bone002
+    400108: FL_Waist_Bone003
+    400110: FL_Waist_Point
+    400112: FR_Waist_Bone001
+    400114: FR_Waist_Bone002
+    400116: FR_Waist_Bone003
+    400118: FR_Waist_Point
+    400120: L Eye Bone
+    400122: L Eye Point
+    400124: L_CalfLeaf_Bone001
+    400126: L_CalfLeaf_Bone002
+    400128: L_CalfLeaf_Bone003
+    400130: L_CalfLeaf_Bone011
+    400132: L_CalfLeaf_Bone022
+    400134: L_CalfLeaf_Bone033
+    400136: L_CalfLeaf_Bone111
+    400138: L_CalfLeaf_Bone1111
+    400140: L_CalfLeaf_Bone222
+    400142: L_CalfLeaf_Bone2222
+    400144: L_CalfLeaf_Point
+    400146: L_Deltoid_Box001
+    400148: L_Waist_Bone001
+    400150: L_Waist_Point
+    400152: Mask_Box001
+    400154: Mask_Point001
+    400156: //RootNode
+    400158: Prop1_Bone001
+    400160: Prop1_Bone002
+    400162: Prop1_Bone003
+    400164: Prop1_Bone004
+    400166: Prop1_Bone005
+    400168: Prop1_Bone006
+    400170: Prop1_Bone007
+    400172: Prop1_Bone008
+    400174: Prop1_Bone009
+    400176: Prop1_Point001
+    400178: Prop1_Point002
+    400180: Prop1_Point003
+    400182: Prop2_Point
+    400184: R Eye Bone
+    400186: R Eye Point
+    400188: R_ArmLead_Bone001
+    400190: R_ArmLead_Bone002
+    400192: R_ArmLead_Bone011
+    400194: R_ArmLead_Bone022
+    400196: R_ArmLead_Bone111
+    400198: R_ArmLead_Bone1111
+    400200: R_ArmLead_Bone222
+    400202: R_ArmLead_Bone2222
+    400204: R_ArmLead_Point
+    400206: R_Deltoid_Box001
+    400208: R_Waist_Bone001
+    400210: R_Waist_Point
+    400212: Root
+    400214: Waist_Box001
+    400216: Waist_Point
+    2300000: Face
+    3300000: Face
+    4300000: Face
+    7400000: Min_035_Kanaka_01_a_Idle
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0
+    animationPositionError: 0
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Min_035_Kanaka_01_a_Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
