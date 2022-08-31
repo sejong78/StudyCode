@@ -14,18 +14,6 @@ public class TableLoadingHow2Use : MonoBehaviour
         var myClass = new MyClass();
 
         var clone = DeepCopy.Copy( myClass );
-
-		var result = await RESTAPIManager.INSTANCE.Request( 
-            uri:"https://www.google.co.jp/", 
-            cancleKey: "", 
-            "client_id", "testRESTAPI",
-            "client_secret", "",
-            "token", "token" );
-
-        if( true == result.Item1 )
-		{
-            DebugExtensions.Log( $"result.Item2 = {result.Item2}", Color.white );
-        }
 	}
 
 	// Update is called once per frame

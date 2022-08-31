@@ -12,6 +12,10 @@ public class UI_Worldmap_CharacterCtr : MonoBehaviour
         Idle,
         Run,
         Battle_Idle,
+
+        Attack,
+        Skill,
+        Damaged,
     }
 
     public enum EModel
@@ -105,7 +109,34 @@ public class UI_Worldmap_CharacterCtr : MonoBehaviour
         }
     }
 
-    //@@-------------------------------------------------------------------------------------------------------------------------
-    //@@-------------------------------------------------------------------------------------------------------------------------
+	//@@-------------------------------------------------------------------------------------------------------------------------
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	[ContextMenu("STATE/ATTACK")]
+    public void Attack()
+	{
+        if( false == Application.isPlaying )
+            return;
+
+        Play( EState.Attack, Vector3.zero );
+	}
+
+	[ContextMenu( "STATE/SKILL" )]
+	public void Skill()
+	{
+		if( false == Application.isPlaying )
+			return;
+
+		Play( EState.Skill, Vector3.zero );
+	}
+
+	[ContextMenu( "STATE/Damaged" )]
+	public void Damaged()
+	{
+		if( false == Application.isPlaying )
+			return;
+
+		Play( EState.Damaged, Vector3.zero );
+	}
 
 }//UI_Worldmap_CharacterCtr
