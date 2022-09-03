@@ -11,6 +11,7 @@ using UnityEngine;
 /// @date 2022/8/31
 /// @author sejong
 /// @brief 유니티 콘솔창에 System.Console 출력 내용이 표시되도록 하는 유틸 클래스
+/// 시스템 콘솔 출력 후, 추가로 유니티 로그 출력하도록 오버라이드 한다.
 /// </summary>
 public class DebugLogWriter : System.IO.TextWriter
 {

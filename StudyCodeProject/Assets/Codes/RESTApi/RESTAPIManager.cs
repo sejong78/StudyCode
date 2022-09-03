@@ -52,6 +52,7 @@ public class RESTAPIManager : BaseSingleton<RESTAPIManager>, IBaseSingleton
 		DebugExtensions.AppendLineLog( $"[RESTAPI] uri = {uri}", Color.white );
 #endif//DEBUG
 
+		// RestApi 의 경우는 Get 방식이다.
 		var downHandler = await UniTaskManager.INSTANCE.WebRequest_Get( 
 			uri, cancleKey, (req) => 
 			{
