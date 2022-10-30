@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 /// <summary>
 /// @class UGUI_How2Use
@@ -17,6 +18,35 @@ using UnityEngine;
 public class UGUI_How2Use : MonoBehaviour
 {
 	//@@-------------------------------------------------------------------------------------------------------------------------
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	[SerializeField]
+	private SpriteAtlas _atlas = null;
+
+	[SerializeField]
+	private Transform _contentRoot = null;
+
+	[SerializeField]
+	private GameObject _listItemPrefab = null;
+
+	string[] _imgNames = { "LBO_Button_Block_Down", "LBO_Button_Control_Dodge_Active" };
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+	//@@-------------------------------------------------------------------------------------------------------------------------
+
+	private void Start()
+	{
+		UIListItem item = null;
+		Sprite img = null;
+
+		for( int i = 0; i < 10; ++i )
+		{
+			item = Instantiate( _listItemPrefab, _contentRoot ).GetComponent<UIListItem>();
+			img = _atlas.GetSprite( _imgNames[ i % 2 ] );
+			item.Init( img );
+		}
+	}
+
 	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	/// <summary>
@@ -39,6 +69,14 @@ public class UGUI_How2Use : MonoBehaviour
 #endif//UNITY_EDITOR
 	
 	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
+	
+	public void OnClick_ImageButton()
+	{
+		Debug.Log( $"[UGUI_How2Use.OnClick_ImageButton] Clicked" );
+	}
+
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
 	//@@-------------------------------------------------------------------------------------------------------------------------
