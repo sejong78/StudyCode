@@ -59,6 +59,8 @@
     <Compile Include="Assets\Codes\Utility\GoogleSheetsForUnity\Scripts\Editor\ContinuationManager.cs" />
     <Compile Include="Assets\Codes\Utility\GoogleSheetsForUnity\Scripts\Editor\GSFUEditorMenu.cs" />
     <Compile Include="Assets\Editor\EditorWindowBase\EditorWindowBase.cs" />
+    <Compile Include="Assets\Codes\Recyclable Scroll Rect\Main\Editor\RecyclableScrollRectEditor.cs" />
+    <Compile Include="Assets\Codes\Recyclable Scroll Rect\Main\Editor\RecyclableScrollViewEditorTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
