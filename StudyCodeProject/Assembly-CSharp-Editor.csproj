@@ -56,11 +56,11 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Codes\Recyclable Scroll Rect\Main\Editor\RecyclableScrollViewEditorTool.cs" />
     <Compile Include="Assets\Codes\Utility\GoogleSheetsForUnity\Scripts\Editor\ContinuationManager.cs" />
     <Compile Include="Assets\Codes\Utility\GoogleSheetsForUnity\Scripts\Editor\GSFUEditorMenu.cs" />
     <Compile Include="Assets\Editor\EditorWindowBase\EditorWindowBase.cs" />
     <Compile Include="Assets\Codes\Recyclable Scroll Rect\Main\Editor\RecyclableScrollRectEditor.cs" />
-    <Compile Include="Assets\Codes\Recyclable Scroll Rect\Main\Editor\RecyclableScrollViewEditorTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
