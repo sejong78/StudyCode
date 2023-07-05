@@ -4,6 +4,7 @@
  * @author sejong
  * @brief 싱글톤 베이스 클레스, 실제 사용은 상속 받아서 사용한다.
  *///-------------------------------------------------------------------------------
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,13 +17,22 @@ namespace BaseSingleton
 	/// @date 2022/7/13
 	/// @author sejong
 	/// @brief 싱글톤 베이스 클레스, 실제 사용은 상속 받아서 사용한다.
+	/// Lazy<T>는 초기화를 지연시켜서 접근하려고 하면 그때 객체를 생성하는 클래스로,
+	/// 멀티 스레드에서도 안전하기 때문에 lock 대신 사용할 수 있다.
 	/// </summary>
 	public abstract class BaseSingleton<T> where T : class, IBaseSingleton, new()
 	{
 		//@@-------------------------------------------------------------------------------------------------------------------------
 		//@@-------------------------------------------------------------------------------------------------------------------------
 
-		protected static T _instance = null;
+		protected static readonly Lazy<T> _instance = new Lazy<T>( () =>
+		{
+			T instance = new();
+
+			instance.Initialize();
+
+			return instance;
+		} );
 
 		//@@-------------------------------------------------------------------------------------------------------------------------
 
@@ -30,17 +40,9 @@ namespace BaseSingleton
 		{
 			get
 			{
-				if( null == _instance )
-				{
-					_instance = new T();
-
-					_instance.Initialize();
-				}
-
-				return _instance;
+				return _instance.Value;
 			}
 		}
-
 
 		//@@-------------------------------------------------------------------------------------------------------------------------
 		//@@-------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +53,7 @@ namespace BaseSingleton
 		public static void Release()
 		{
 			if( null != _instance )
-				_instance.Dispose();
+				_instance.Value.Dispose();
 		}
 
 		//@@-------------------------------------------------------------------------------------------------------------------------
