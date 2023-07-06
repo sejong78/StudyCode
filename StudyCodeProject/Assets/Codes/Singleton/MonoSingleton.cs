@@ -1,26 +1,23 @@
 ﻿/**---------------------------------------------------------------------------------
- * @file BaseSingleton.cs
- * @date 2022/7/13
+ * @file MonoSingleton.cs
+ * @date 2023/7/6
  * @author sejong
- * @brief 싱글톤 베이스 클레스, 실제 사용은 상속 받아서 사용한다.
+ * @brief 모노를 상속받는 싱글톤 베이스, 사용은 상속을 받아서 사용한다.
  *///-------------------------------------------------------------------------------
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BaseSingleton
 {
-
 	/// <summary>
-	/// @class BaseSingleton
-	/// @date 2022/7/13
+	/// @class MonoSingleton
+	/// @date 2023/7/6
 	/// @author sejong
-	/// @brief 싱글톤 베이스 클레스, 실제 사용은 상속 받아서 사용한다.
+	/// @brief 모노를 상속받는 싱글톤 베이스, 사용은 상속을 받아서 사용한다.
 	/// Lazy<T>는 초기화를 지연시켜서 접근하려고 하면 그때 객체를 생성하는 클래스로,
 	/// 멀티 스레드에서도 안전하기 때문에 lock 대신 사용할 수 있다.
 	/// </summary>
-	public abstract class BaseSingleton<T> where T : class, IBaseSingleton, new()
+	public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour, IBaseSingleton
 	{
 		//@@-------------------------------------------------------------------------------------------------------------------------
 		//@@-------------------------------------------------------------------------------------------------------------------------
@@ -44,7 +41,23 @@ namespace BaseSingleton
 		/// <returns></returns>
 		private static T CreateSingleton()
 		{
-			T instance = new();
+			// 일단 하이어라키를 뒤져서 이미 생성 되어 있는 오브젝트가 있는지 찾는다.
+			T instance = GameObject.FindObjectOfType( typeof( T ) ) as T;
+
+			// 있다면 그걸 사용한다.
+			if( null != instance )
+			{
+				instance.Initialize();
+
+				return instance;
+			}
+
+			// 없다면 생성한다.
+			GameObject go = new GameObject( typeof(T).Name );
+
+			instance = go.AddComponent<T>();
+
+			DontDestroyOnLoad( go );
 
 			instance.Initialize();
 
@@ -52,7 +65,7 @@ namespace BaseSingleton
 		}
 
 		//@@-------------------------------------------------------------------------------------------------------------------------
-		
+
 		/// <summary>
 		/// 릴리즈 함수 호출
 		/// </summary>
@@ -65,27 +78,6 @@ namespace BaseSingleton
 		//@@-------------------------------------------------------------------------------------------------------------------------
 		//@@-------------------------------------------------------------------------------------------------------------------------
 
-	}//BaseSingleton
-
-	public interface IBaseSingleton
-	{
-		//@@-------------------------------------------------------------------------------------------------------------------------
-		//@@-------------------------------------------------------------------------------------------------------------------------
-
-		/// <summary>
-		/// 초기화 함수 입니다.
-		/// 할당 될때 한번 호출됩니다.
-		/// </summary>
-		void Initialize();
-
-		/// <summary>
-		/// 릴리즈 함수 입니다.
-		/// </summary>
-		void Dispose();
-
-		//@@-------------------------------------------------------------------------------------------------------------------------
-		//@@-------------------------------------------------------------------------------------------------------------------------
-
-	}//IBaseSingleton
+	}//MonoSingleton
 
 }//BaseSingleton
