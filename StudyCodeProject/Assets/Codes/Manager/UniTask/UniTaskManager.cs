@@ -888,8 +888,7 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 	/// </summary>
 	public void Initialize()
 	{
-		Dispose();
-				
+		Release();
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
@@ -897,7 +896,7 @@ public class UniTaskManager : BaseSingleton<UniTaskManager>, IBaseSingleton
 	/// <summary>
 	/// 릴리즈 함수 
 	/// </summary>
-	public void Dispose()
+	public void Release()
 	{
 		// 살아 있는 토큰은 모두 정리하고 클리어
 		foreach( var ctn in _cancelTokenDic.Values )

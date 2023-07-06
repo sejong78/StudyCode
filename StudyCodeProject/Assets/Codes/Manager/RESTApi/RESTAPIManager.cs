@@ -162,7 +162,7 @@ public class RESTAPIManager : BaseSingleton<RESTAPIManager>, IBaseSingleton
 
 	#region IBaseSingleton
 
-	public void Dispose()
+	public void Release()
 	{
 	}
 

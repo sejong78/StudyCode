@@ -2,7 +2,7 @@
  * @file MonoSingleton.cs
  * @date 2023/7/6
  * @author sejong
- * @brief 모노를 상속받는 싱글톤 베이스, 사용은 상속을 받아서 사용한다.
+ * @brief 모노를 상속받는 싱글턴 베이스, 사용은 상속을 받아서 사용한다.
  *///-------------------------------------------------------------------------------
 using System;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace BaseSingleton
 	/// @class MonoSingleton
 	/// @date 2023/7/6
 	/// @author sejong
-	/// @brief 모노를 상속받는 싱글톤 베이스, 사용은 상속을 받아서 사용한다.
+	/// @brief 모노를 상속받는 싱글턴 베이스, 사용은 상속을 받아서 사용한다.
 	/// Lazy<T>는 초기화를 지연시켜서 접근하려고 하면 그때 객체를 생성하는 클래스로,
 	/// 멀티 스레드에서도 안전하기 때문에 lock 대신 사용할 수 있다.
 	/// </summary>
@@ -67,12 +67,12 @@ namespace BaseSingleton
 		//@@-------------------------------------------------------------------------------------------------------------------------
 
 		/// <summary>
-		/// 릴리즈 함수 호출
+		/// 싱글턴 초기화
 		/// </summary>
-		public static void Release()
+		public static void Reset()
 		{
 			if( null != _instance )
-				_instance.Value.Dispose();
+				_instance.Value.Release();
 		}
 
 		//@@-------------------------------------------------------------------------------------------------------------------------
