@@ -42,7 +42,7 @@ namespace BaseSingleton
 		/// 생성 함수 변경의 여지가 없다.
 		/// </summary>
 		/// <returns></returns>
-		private static T CreateSingleton()
+		protected static T CreateSingleton()
 		{
 			T instance = new();
 
@@ -61,7 +61,7 @@ namespace BaseSingleton
 			if( null != _instance )
 				_instance.Value.Release();
 		}
-
+		
 		//@@-------------------------------------------------------------------------------------------------------------------------
 		//@@-------------------------------------------------------------------------------------------------------------------------
 

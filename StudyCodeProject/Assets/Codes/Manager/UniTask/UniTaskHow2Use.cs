@@ -265,7 +265,7 @@ public class UniTaskHow2Use : MonoBehaviour
 	
 	private void OnDestroy()
 	{
-		UniTaskManager.Release();
+		UniTaskManager.Reset();
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------

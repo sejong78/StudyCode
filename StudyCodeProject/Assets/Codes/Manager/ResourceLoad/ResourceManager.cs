@@ -49,6 +49,23 @@ public class ResourceManager : BaseSingleton<ResourceManager>, IBaseSingleton
 	}
 
 	//@@-------------------------------------------------------------------------------------------------------------------------
+	
+	/// <summary>
+	/// 사용하지 않는 메모리를 수집한다.
+	/// </summary>
+	/// <param name="collectGC"></param>
+	/// <returns></returns>
+	public async UniTask UnloadUnusedAssets( bool collectGC = false )
+	{
+		await Resources.UnloadUnusedAssets();
+
+		if( false == collectGC )
+			return;
+
+		await UniTaskManager.INSTANCE.Run( System.GC.Collect );
+	}
+
+	//@@-------------------------------------------------------------------------------------------------------------------------
 
 	#region IBaseSingleton
 
