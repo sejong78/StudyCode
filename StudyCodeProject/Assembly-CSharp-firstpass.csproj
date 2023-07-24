@@ -82,6 +82,9 @@
     <Compile Include="Assets\Plugins\Anima2D\Examples\Scripts\CharacterMotion.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Plugins\UniRx\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>C:\Programs\UnityEditor\2021.3.11f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -763,6 +766,10 @@
     <ProjectReference Include="UniTask.Linq.csproj">
       <Project>{E3C56512-96E3-69E5-B390-EB810DA97C02}</Project>
       <Name>UniTask.Linq</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{804202D5-CF6C-BAAE-E123-8C7FC0A35155}</Project>
+      <Name>UniRx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
