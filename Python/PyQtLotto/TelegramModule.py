@@ -41,20 +41,20 @@ class TelegramModule( object ):
             self.m_instance = TG.Bot( token = TelegramModule.TELEGRAM_CHAT_BOT_TOKEN );
     #__CreateInstance
 
-    def SendMessageToPersonal( self, msg:str ):
+    async def SendMessageToPersonal( self, msg:str ):
         """쳇봇과의 1:1 메세지 창에 글을 남긴다."""
         if not self.__CheckInstance():
             return;
 
-        self.m_instance.sendMessage( chat_id = TelegramModule.TELEGRAM_CHAT_BOT_PERSONAL_ID, text = msg, parse_mode = 'Markdown' );
+        await self.m_instance.sendMessage( chat_id = TelegramModule.TELEGRAM_CHAT_BOT_PERSONAL_ID, text = msg, parse_mode = 'Markdown' );
     #SendMessageToPersonal
 
-    def SendMessageToGroupLotto( self, msg:str ):
+    async def SendMessageToGroupLotto( self, msg:str ):
         """로또 번호 알림 그룹 메세지 창에 글을 남긴다."""
         if not self.__CheckInstance():
             return;
 
-        self.m_instance.sendMessage( chat_id = TelegramModule.TELEGRAM_CHAT_BOT_GROUP_LOTTO_ID, text = msg, parse_mode = 'Markdown' );
+        await self.m_instance.sendMessage( chat_id = TelegramModule.TELEGRAM_CHAT_BOT_GROUP_LOTTO_ID, text = msg, parse_mode = 'Markdown' );
     #SendMessageToGroupLotto
 
 #TelegramModule

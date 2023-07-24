@@ -6,6 +6,7 @@ import LottoModule as LM;
 import WebCrawlerModule as WM;
 import TelegramModule as TM;
 import re as STR_RE;
+import asyncio;
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
@@ -67,7 +68,7 @@ class WindowClass( QMainWindow, ui_lotto_frame ):
 
         #지난주 정보 푸시
         msg = f"지난 {last_index}회차 로또 당첨번호\n {last_num1}, {last_num2}, {last_num3}, {last_num4}, {last_num5}, {last_num6}\n를 바탕으로 로또 번호 생성 합니다.";
-        self.m_telegram.SendMessageToGroupLotto( msg );
+        asyncio.run( self.m_telegram.SendMessageToGroupLotto( msg ) );
 
         #로또 객체 생성
         self.m_lotto = LM.LottoModule();
@@ -106,7 +107,7 @@ class WindowClass( QMainWindow, ui_lotto_frame ):
 
         # 모두 0이 아니기 때문에 생성이 완료되었다.
         msg = f"{self.m_index} 회차 로또 번호 생성이 완료 되었습니다.\n{ self.m_create_numbers[0] }\n{ self.m_create_numbers[1] }\n{ self.m_create_numbers[2] }\n{ self.m_create_numbers[3] }\n{ self.m_create_numbers[4] }\n행운을 빕니다!";
-        self.m_telegram.SendMessageToGroupLotto( msg );
+        asyncio.run( self.m_telegram.SendMessageToGroupLotto( msg ) );
 
     # check_finish
 
