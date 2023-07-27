@@ -703,26 +703,14 @@
     <Reference Include="System.Xml.XPath.XDocument">
       <HintPath>C:\Programs\UnityEditor\2021.3.11f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Services.Core.Analytics">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Services.Core.Environments">
-      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Environments.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
@@ -742,26 +730,26 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Services.Core">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Services.Core.Analytics">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Environments">
+      <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Environments.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{EC1E2FD8-CDA1-928C-4BCE-AC3A165768D3}</Project>
-      <Name>UniTask.TextMeshPro</Name>
-    </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
       <Project>{896441AA-D3AF-4F9C-7375-FE25027291A1}</Project>
       <Name>UniTask.DOTween</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.csproj">
-      <Project>{F7AEF6D5-9C39-7D65-693F-4D135F95224D}</Project>
-      <Name>UniTask</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{64CD34BD-E171-7F4B-22E9-E5BACF738C65}</Project>
-      <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
       <Project>{E3C56512-96E3-69E5-B390-EB810DA97C02}</Project>
@@ -770,6 +758,18 @@
     <ProjectReference Include="UniRx.csproj">
       <Project>{804202D5-CF6C-BAAE-E123-8C7FC0A35155}</Project>
       <Name>UniRx</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.csproj">
+      <Project>{EC1E2FD8-CDA1-928C-4BCE-AC3A165768D3}</Project>
+      <Name>UniTask.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.csproj">
+      <Project>{F7AEF6D5-9C39-7D65-693F-4D135F95224D}</Project>
+      <Name>UniTask</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.csproj">
+      <Project>{64CD34BD-E171-7F4B-22E9-E5BACF738C65}</Project>
+      <Name>UniTask.Addressables</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
