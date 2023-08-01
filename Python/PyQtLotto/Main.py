@@ -120,7 +120,7 @@ class WindowClass( QMainWindow, ui_lotto_frame ):
         self.m_displays[vm.row][3].display( vm.col4 );
         self.m_displays[vm.row][4].display( vm.col5 );
         self.m_displays[vm.row][5].display( vm.col6 );
-    # OnEvent_SetNumber
+    # OnEvent_ShowNumber
 
     # 생성된 뷰모델을 받아서 저장한다.
     @pyqtSlot(LottoViewModel)
