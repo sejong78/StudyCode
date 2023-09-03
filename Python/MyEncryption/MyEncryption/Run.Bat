@@ -1,0 +1,2 @@
+python MyEncryption.py
+pause

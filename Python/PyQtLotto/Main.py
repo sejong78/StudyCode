@@ -107,7 +107,8 @@ class WindowClass( QMainWindow, ui_lotto_frame ):
 
         # 모두 0이 아니기 때문에 생성이 완료되었다.
         msg = f"{self.m_index} 회차 로또 번호 생성이 완료 되었습니다.\n{ self.m_create_numbers[0] }\n{ self.m_create_numbers[1] }\n{ self.m_create_numbers[2] }\n{ self.m_create_numbers[3] }\n{ self.m_create_numbers[4] }\n행운을 빕니다!";
-        asyncio.run( self.m_telegram.SendMessageToGroupLotto( msg ) );
+        print( msg );
+        #asyncio.run( self.m_telegram.SendMessageToGroupLotto( msg ) );
 
     # check_finish
 
@@ -269,4 +270,4 @@ if __name__ == "__main__":
     myWindow.show();
 
     #프로그램을 이벤트루프로 진입시키는(프로그램을 작동시키는) 코드
-    app.exec_();
+    sys.exit( app.exec_() );
